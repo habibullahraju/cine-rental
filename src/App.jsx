@@ -1,20 +1,20 @@
-import "./App.css";
-import MovieList from "./cine/MovieList";
-import Footer from "./Footer";
-import Header from "./Header";
-import Sidebar from "./Sidebar";
+import { useReducer, useState } from "react";
+import { ToastContainer } from "react-toastify";
+import { MovieContex, ThemeContex } from "./contex";
+import Page from "./page/Page";
+import { cardReducer, initialState } from "./reducers/cardReducer";
 
 function App() {
+  const [darkMode, setDarkMode] = useState(true);
+  const [state, dispatch] = useReducer(cardReducer, initialState);
   return (
     <>
-      <Header />
-      <main>
-        <div className="container grid lg:grid-cols-[218px_1fr] gap-[3.5rem]">
-          <Sidebar />
-          <MovieList />
-        </div>
-      </main>
-      <Footer />
+      <ThemeContex.Provider value={{ darkMode, setDarkMode }}>
+        <MovieContex.Provider value={{ state, dispatch }}>
+          <Page />
+          <ToastContainer />
+        </MovieContex.Provider>
+      </ThemeContex.Provider>
     </>
   );
 }

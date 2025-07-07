@@ -12,3 +12,7 @@ body {
   --color-primary: #00d991;
   
 }
+
+.dark {
+    @apply bg-[#171923] text-white
+}
